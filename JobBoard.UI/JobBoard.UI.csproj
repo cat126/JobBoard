@@ -169,6 +169,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApplicationsController.cs" />
+    <Compile Include="Controllers\ApplicationStatusController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocationsController.cs" />
@@ -810,6 +811,11 @@
     <Content Include="Views\Applications\Details.cshtml" />
     <Content Include="Views\Applications\Edit.cshtml" />
     <Content Include="Views\Applications\Index.cshtml" />
+    <Content Include="Views\ApplicationStatus\Create.cshtml" />
+    <Content Include="Views\ApplicationStatus\Delete.cshtml" />
+    <Content Include="Views\ApplicationStatus\Details.cshtml" />
+    <Content Include="Views\ApplicationStatus\Edit.cshtml" />
+    <Content Include="Views\ApplicationStatus\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
