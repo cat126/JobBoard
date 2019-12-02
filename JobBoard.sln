@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobBoard.UI", "JobBoard.UI\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobBoard.UI.Tests", "JobBoard.UI.Tests\JobBoard.UI.Tests.csproj", "{962E2ADF-0256-4AF4-8D9F-6B5E275BDFD5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobBoard.DataLayer", "JobBoard.DataLayer\JobBoard.DataLayer.csproj", "{CAC36869-A30D-4B94-8718-030F36D303A8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{962E2ADF-0256-4AF4-8D9F-6B5E275BDFD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{962E2ADF-0256-4AF4-8D9F-6B5E275BDFD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{962E2ADF-0256-4AF4-8D9F-6B5E275BDFD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAC36869-A30D-4B94-8718-030F36D303A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAC36869-A30D-4B94-8718-030F36D303A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAC36869-A30D-4B94-8718-030F36D303A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAC36869-A30D-4B94-8718-030F36D303A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
