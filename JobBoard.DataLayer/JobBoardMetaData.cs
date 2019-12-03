@@ -15,8 +15,7 @@ namespace JobBoard.DataLayer
         public string UserID { get; set; }
         [Required(ErrorMessage = "*")]
         public System.DateTime ApplicationDate { get; set; }
-        //[UIHint()]
-        //TODO Bruce Smith add code to make this muit line
+        [UIHint("MultineText")]
         [StringLength(2000, ErrorMessage = "value must be 2000 character or less.")]
         public string ManagerNotes { get; set; }
         [Required(ErrorMessage = "*")]
@@ -44,8 +43,8 @@ namespace JobBoard.DataLayer
         [Required(ErrorMessage = "*")]
         [StringLength(50, ErrorMessage = "value must be 50 character or less.")]
         public string CategoryName { get; set; }
-        [StringLength(500, ErrorMessage = "value must be 500 character or less.")]
-        //TODO Bruce Smith add code to make this muit line
+        [StringLength(500, ErrorMessage = "value must be 500 character or less.")] 
+        [UIHint("MultineText")]
         public string CategoryDescription { get; set; }
     }
     [MetadataType(typeof(CategoryMetaData))]
