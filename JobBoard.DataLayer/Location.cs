@@ -26,6 +26,7 @@ namespace JobBoard.DataLayer
         public decimal Latitude { get; set; }
         public decimal Longitude { get; set; }
         public string Address { get; set; }
+        public string PhotoFileName { get; set; }
     
         public virtual UserDetail UserDetail { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

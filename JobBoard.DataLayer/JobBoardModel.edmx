@@ -64,6 +64,7 @@
           <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CategoryName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="CategoryDescription" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="IconFileName" Type="varchar" MaxLength="75" />
         </EntityType>
         <EntityType Name="Location">
           <Key>
@@ -75,6 +76,7 @@
           <Property Name="Latitude" Type="decimal" Precision="38" Scale="7" Nullable="false" />
           <Property Name="Longitude" Type="decimal" Precision="38" Scale="7" Nullable="false" />
           <Property Name="Address" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="PhotoFileName" Type="varchar" MaxLength="75" />
         </EntityType>
         <EntityType Name="OpenPositions">
           <Key>
@@ -92,6 +94,7 @@
           <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="JobDescription" Type="varchar(max)" Nullable="false" />
           <Property Name="CategoryID" Type="int" Nullable="false" />
+          <Property Name="PhotoFileName" Type="varchar" MaxLength="75" />
         </EntityType>
         <EntityType Name="UserDetails">
           <Key>
@@ -315,6 +318,7 @@
           <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CategoryDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Positions" Relationship="Self.FK_Positions_Categories" FromRole="Categories" ToRole="Positions" />
+          <Property Name="IconFileName" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Location">
           <Key>
@@ -328,6 +332,7 @@
           <Property Name="Address" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="UserDetail" Relationship="Self.FK_Location_UserDetails" FromRole="Location" ToRole="UserDetails" />
           <NavigationProperty Name="OpenPositions" Relationship="Self.FK_OpenPositions_Location" FromRole="Location" ToRole="OpenPositions" />
+          <Property Name="PhotoFileName" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="OpenPosition">
           <Key>
@@ -350,6 +355,7 @@
           <Property Name="CategoryID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Category" Relationship="Self.FK_Positions_Categories" FromRole="Positions" ToRole="Categories" />
           <NavigationProperty Name="OpenPositions" Relationship="Self.FK_OpenPositions_Positions" FromRole="Positions" ToRole="OpenPositions" />
+          <Property Name="PhotoFileName" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="UserDetail">
           <Key>
@@ -569,6 +575,7 @@
           <EntitySetMapping Name="Categories">
             <EntityTypeMapping TypeName="JobBoardModel.Category">
               <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="IconFileName" ColumnName="IconFileName" />
                 <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
                 <ScalarProperty Name="CategoryDescription" ColumnName="CategoryDescription" />
@@ -578,6 +585,7 @@
           <EntitySetMapping Name="Locations">
             <EntityTypeMapping TypeName="JobBoardModel.Location">
               <MappingFragment StoreEntitySet="Location">
+                <ScalarProperty Name="PhotoFileName" ColumnName="PhotoFileName" />
                 <ScalarProperty Name="LocationName" ColumnName="LocationName" />
                 <ScalarProperty Name="LocationID" ColumnName="LocationID" />
                 <ScalarProperty Name="ManagerID" ColumnName="ManagerID" />
@@ -599,6 +607,7 @@
           <EntitySetMapping Name="Positions">
             <EntityTypeMapping TypeName="JobBoardModel.Position">
               <MappingFragment StoreEntitySet="Positions">
+                <ScalarProperty Name="PhotoFileName" ColumnName="PhotoFileName" />
                 <ScalarProperty Name="PositionID" ColumnName="PositionID" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="JobDescription" ColumnName="JobDescription" />
