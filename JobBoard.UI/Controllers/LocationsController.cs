@@ -82,7 +82,10 @@ namespace JobBoard.UI.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ManagerID = new SelectList(db.UserDetails, "UserID", "FirstName", location.ManagerID);
+            var managers = from x in db.AspNetUsers
+                           where x.AspNetRoles.Where(y => y.Name == "Managers").Count() > 0
+                           select x;
+            ViewBag.Managers = managers.ToList();
             return View(location);
         }
 
@@ -91,7 +94,7 @@ namespace JobBoard.UI.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "LocationID,ManagerID,Latitude,Longitude,Address")] Location location)
+        public ActionResult Edit([Bind(Include = "LocationName,LocationID,ManagerID,Latitude,Longitude,Address")] Location location)
         {
             if (ModelState.IsValid)
             {
@@ -99,7 +102,10 @@ namespace JobBoard.UI.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ManagerID = new SelectList(db.UserDetails, "UserID", "FirstName", location.ManagerID);
+            var managers = from x in db.AspNetUsers
+                           where x.AspNetRoles.Where(y => y.Name == "Managers").Count() > 0
+                           select x;
+            ViewBag.Managers = managers.ToList();
             return View(location);
         }
 
