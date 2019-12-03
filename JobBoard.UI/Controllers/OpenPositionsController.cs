@@ -39,7 +39,7 @@ namespace JobBoard.UI.Controllers
         // GET: OpenPositions/Create
         public ActionResult Create()
         {
-            ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "ManagerID");
+            ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "LocationName");
             ViewBag.PositionID = new SelectList(db.Positions, "PositionID", "Title");
             return View();
         }
@@ -58,7 +58,7 @@ namespace JobBoard.UI.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "ManagerID", openPosition.LocationID);
+            ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "LocationName", openPosition.LocationID);
             ViewBag.PositionID = new SelectList(db.Positions, "PositionID", "Title", openPosition.PositionID);
             return View(openPosition);
         }
@@ -75,7 +75,7 @@ namespace JobBoard.UI.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "ManagerID", openPosition.LocationID);
+            ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "LocationName", openPosition.LocationID);
             ViewBag.PositionID = new SelectList(db.Positions, "PositionID", "Title", openPosition.PositionID);
             return View(openPosition);
         }
@@ -93,7 +93,7 @@ namespace JobBoard.UI.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "ManagerID", openPosition.LocationID);
+            ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "LocationName", openPosition.LocationID);
             ViewBag.PositionID = new SelectList(db.Positions, "PositionID", "Title", openPosition.PositionID);
             return View(openPosition);
         }
