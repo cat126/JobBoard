@@ -18,7 +18,10 @@
             @Html.DisplayNameFor(model => model.JobDescription)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Category.CategoryDescription)
+            @Html.DisplayNameFor(model => model.PhotoFileName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category.CategoryName)
         </th>
         <th></th>
     </tr>
@@ -32,7 +35,10 @@
             @Html.DisplayFor(modelItem => item.JobDescription)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Category.CategoryDescription)
+            @Html.DisplayFor(modelItem => item.PhotoFileName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category.CategoryName)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.PositionID }) |

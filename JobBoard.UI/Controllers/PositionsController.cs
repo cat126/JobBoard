@@ -39,7 +39,7 @@ namespace JobBoard.UI.Controllers
         // GET: Positions/Create
         public ActionResult Create()
         {
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryDescription");
+            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName");
             return View();
         }
 
@@ -48,7 +48,7 @@ namespace JobBoard.UI.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PositionID,Title,JobDescription,CategoryID")] Position position)
+        public ActionResult Create([Bind(Include = "PositionID,Title,JobDescription,CategoryID,PhotoFileName")] Position position)
         {
             if (ModelState.IsValid)
             {
@@ -57,7 +57,7 @@ namespace JobBoard.UI.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryDescription", position.CategoryID);
+            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", position.CategoryID);
             return View(position);
         }
 
@@ -73,7 +73,7 @@ namespace JobBoard.UI.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryDescription", position.CategoryID);
+            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", position.CategoryID);
             return View(position);
         }
 
@@ -82,7 +82,7 @@ namespace JobBoard.UI.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "PositionID,Title,JobDescription,CategoryID")] Position position)
+        public ActionResult Edit([Bind(Include = "PositionID,Title,JobDescription,CategoryID,PhotoFileName")] Position position)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +90,7 @@ namespace JobBoard.UI.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryDescription", position.CategoryID);
+            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", position.CategoryID);
             return View(position);
         }
 
