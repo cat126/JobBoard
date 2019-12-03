@@ -33,14 +33,14 @@
         <div class="container">
             <div class="row align-items-center justify-content-between d-flex">
                 <div id="logo">
-                    <a href="~/Content/index.html"><img src="~/Content/img/logo.png" alt="" title="" /></a>
+                    <a href="@Url.Action("Index","Home")"><img src="~/Content/img/logo.png" alt="logo" title="" /></a>
                 </div>
                 <nav id="nav-menu-container">
                     <ul class="nav-menu">
-                        <li class="menu-active"><a href="~/Content/index.html">Home</a></li>
-                        <li><a href="~/Content/about-us.html">About Us</a></li>
+                        <li class="menu-active"><a href="@Url.Action("Index","Home")">Home</a></li>
+                        <li><a href="@Url.Action("About","Home")">About Us</a></li>
                         <li><a href="@Url.Action("Index","Categories")">Categories</a></li>
-                        <li><a href="~/Content/price.html">Job Listing</a></li>
+                        <li><a href="@Url.Action("Index","OpenPositions")">Job Listings</a></li>
                         <li><a href="@Url.Action("Contact","Home")">Contact</a></li>
                         <li class="menu-has-children">
                             <a href="">Manager</a>
