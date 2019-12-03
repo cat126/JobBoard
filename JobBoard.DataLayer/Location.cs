@@ -22,6 +22,7 @@ namespace JobBoard.DataLayer
     
         public int LocationID { get; set; }
         public string ManagerID { get; set; }
+        public string LocationName { get; set; }
         public decimal Latitude { get; set; }
         public decimal Longitude { get; set; }
         public string Address { get; set; }

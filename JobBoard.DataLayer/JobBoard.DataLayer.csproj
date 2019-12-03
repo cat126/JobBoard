@@ -56,6 +56,12 @@
     <Compile Include="ApplicationStatus.cs">
       <DependentUpon>JobBoardModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="AspNetRole.cs">
+      <DependentUpon>JobBoardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUser.cs">
+      <DependentUpon>JobBoardModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Category.cs">
       <DependentUpon>JobBoardModel.tt</DependentUpon>
     </Compile>

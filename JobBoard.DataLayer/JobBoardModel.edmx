@@ -69,8 +69,9 @@
           <Key>
             <PropertyRef Name="LocationID" />
           </Key>
-          <Property Name="LocationID" Type="int" Nullable="false" />
+          <Property Name="LocationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ManagerID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="LocationName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Latitude" Type="decimal" Precision="38" Scale="7" Nullable="false" />
           <Property Name="Longitude" Type="decimal" Precision="38" Scale="7" Nullable="false" />
           <Property Name="Address" Type="nvarchar" MaxLength="1000" Nullable="false" />
@@ -321,6 +322,7 @@
           </Key>
           <Property Name="LocationID" Type="Int32" Nullable="false" />
           <Property Name="ManagerID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LocationName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Latitude" Type="Decimal" Precision="38" Scale="7" Nullable="false" />
           <Property Name="Longitude" Type="Decimal" Precision="38" Scale="7" Nullable="false" />
           <Property Name="Address" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
@@ -576,6 +578,7 @@
           <EntitySetMapping Name="Locations">
             <EntityTypeMapping TypeName="JobBoardModel.Location">
               <MappingFragment StoreEntitySet="Location">
+                <ScalarProperty Name="LocationName" ColumnName="LocationName" />
                 <ScalarProperty Name="LocationID" ColumnName="LocationID" />
                 <ScalarProperty Name="ManagerID" ColumnName="ManagerID" />
                 <ScalarProperty Name="Latitude" ColumnName="Latitude" />
