@@ -45,8 +45,9 @@
                         <li class="menu-has-children">
                             <a href="">Manager</a>
                             <ul>
-                                <li><a href="@Url.Action("Index","Locations")">Manage Locations</a></li>
-                                <li><a href="@Url.Action("Index","Positions")">Manage Positions </a></li>
+                                <li><a href="@Url.Action("Index","Positions")">Manage  Positions </a></li>
+                                <li><a href="@Url.Action("Index","Applications")">Manage Applications</a></li>
+                                <li><a href="@Url.Action("Create","OpenPositions")">List New Job </a></li>
                             </ul>
                         </li>
                         <li class="menu-has-children">
@@ -54,6 +55,7 @@
                             <ul>
                                 <li><a href="@Url.Action("Index","UsersAdmin")">Manage Users</a></li>
                                 <li><a href="@Url.Action("Index","RolesAdmin")">Manage Roles</a></li>
+                                <li><a href="@Url.Action("Index","Locations")">Manage Locations</a></li>
                             </ul>
                         </li>
                         @Html.Partial("_LoginPartial")
