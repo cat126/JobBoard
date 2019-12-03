@@ -12,10 +12,13 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Location.ManagerID)
+            @Html.DisplayNameFor(model => model.Position.Title)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Position.Title)
+            @Html.DisplayNameFor(model => model.Location.LocationName)
+        </th>
+        <th>
+            Manager Name
         </th>
         <th></th>
     </tr>
@@ -23,15 +26,18 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Location.ManagerID)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Position.Title)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.OpenPositionID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.OpenPositionID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.OpenPositionID })
+            @Html.DisplayFor(modelItem => item.Location.LocationName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Location.UserDetail.FirstName) @Html.DisplayFor(modelItem => item.Location.UserDetail.LastName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.OpenPositionID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.OpenPositionID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.OpenPositionID })
         </td>
     </tr>
 }

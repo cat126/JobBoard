@@ -48,10 +48,14 @@ namespace JobBoard.UI.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PositionID,Title,JobDescription,CategoryID,PhotoFileName")] Position position)
+        public ActionResult Create([Bind(Include = "PositionID,Title,JobDescription,CategoryID,PhotoFileName")] Position position, HttpPostedFileBase PhotoFile)
         {
             if (ModelState.IsValid)
             {
+                if (PhotoFile!= null)
+                {
+                    position.PhotoFileName= FileUpload.UploadImageFile(PhotoFile, Server,"/Content/Uploaded/img/");
+                }
                 db.Positions.Add(position);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -82,10 +86,14 @@ namespace JobBoard.UI.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "PositionID,Title,JobDescription,CategoryID,PhotoFileName")] Position position)
+        public ActionResult Edit([Bind(Include = "PositionID,Title,JobDescription,CategoryID,PhotoFileName")] Position position, HttpPostedFileBase PhotoFile)
         {
             if (ModelState.IsValid)
             {
+                if (PhotoFile != null)
+                {
+                    position.PhotoFileName = FileUpload.UploadImageFile(PhotoFile, Server, "/Content/Uploaded/img/");
+                }
                 db.Entry(position).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
