@@ -55,6 +55,9 @@ namespace JobBoard.DataLayer
         [Required(ErrorMessage = "*")]
         public string ManagerID { get; set; }
         [Required(ErrorMessage = "*")]
+        [StringLength(50, ErrorMessage = "value must be 50 character or less.")]
+        public string LocationName { get; set; }
+        [Required(ErrorMessage = "*")]
         public decimal Latitude { get; set; }
         [Required(ErrorMessage = "*")]
         public decimal Longitude { get; set; }
