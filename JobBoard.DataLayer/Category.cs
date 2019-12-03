@@ -21,8 +21,8 @@ namespace JobBoard.DataLayer
         }
     
         public int CategoryID { get; set; }
-        public string CategoryDescription { get; set; }
         public string CategoryName { get; set; }
+        public string CategoryDescription { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Position> Positions { get; set; }
