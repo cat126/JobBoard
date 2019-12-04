@@ -179,6 +179,7 @@
     <Compile Include="Controllers\PositionsController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
+    <Compile Include="Controllers\UserDetailsAdminController.cs" />
     <Compile Include="Controllers\UserDetailsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -823,6 +824,11 @@
     <Content Include="Views\UserDetails\Details.cshtml" />
     <Content Include="Views\UserDetails\Edit.cshtml" />
     <Content Include="Views\UserDetails\Index.cshtml" />
+    <Content Include="Views\UserDetailsAdmin\Create.cshtml" />
+    <Content Include="Views\UserDetailsAdmin\Delete.cshtml" />
+    <Content Include="Views\UserDetailsAdmin\Details.cshtml" />
+    <Content Include="Views\UserDetailsAdmin\Edit.cshtml" />
+    <Content Include="Views\UserDetailsAdmin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
