@@ -27,12 +27,12 @@ namespace JobBoard.UI.Controllers
         // GET: UserDetails/Create
         public ActionResult Create()
         {
-            string userID= User.Identity.GetUserId();
-            
+            string userID = User.Identity.GetUserId();
+
             var userDetailCheck = from x in db.UserDetails
                                   where x.UserID == userID
                                   select x;
-            if (userDetailCheck.Count() !=0)
+            if (userDetailCheck.Count() != 0)
             {
                 return Redirect("/UserDetails/Edit");
             }
@@ -46,13 +46,21 @@ namespace JobBoard.UI.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserID,FirstName,LastName,ResumeFileName,PhotoFileName")] UserDetail userDetail)
+        public ActionResult Create([Bind(Include = "UserID,FirstName,LastName,ResumeFileName,PhotoFileName")] UserDetail userDetail, HttpPostedFileBase PhotoFile, HttpPostedFileBase ResumeFile)
         {
             if (ModelState.IsValid)
             {
                 if (!userDetail.UserID.Equals(User.Identity.GetUserId()))
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+                }
+                if (PhotoFile != null)
+                {
+                    userDetail.PhotoFileName = FileUpload.UploadImageFile(PhotoFile, Server, "/Content/Uploaded/img/");
+                }
+                if (ResumeFile != null)
+                {
+                    userDetail.ResumeFileName = FileUpload.UploadPDFFile(ResumeFile, Server, "/Content/Uploaded/resume/");
                 }
                 db.UserDetails.Add(userDetail);
                 db.SaveChanges();
@@ -78,13 +86,35 @@ namespace JobBoard.UI.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserID,FirstName,LastName,ResumeFileName,PhotoFileName")] UserDetail userDetail)
+        public ActionResult Edit([Bind(Include = "UserID,FirstName,LastName,ResumeFileName,PhotoFileName")] UserDetail userDetail, HttpPostedFileBase PhotoFile, HttpPostedFileBase ResumeFile)
         {
             if (ModelState.IsValid)
             {
                 if (!userDetail.UserID.Equals(User.Identity.GetUserId()))
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+                }
+                if (PhotoFile != null)
+                {
+                    userDetail.PhotoFileName = FileUpload.UploadImageFile(PhotoFile, Server, "/Content/Uploaded/img/");
+                }
+                else
+                {
+                    string oldFileName = (from x in db.UserDetails
+                                          where x.UserID == userDetail.UserID
+                                          select x.PhotoFileName).Single();
+                    userDetail.PhotoFileName = oldFileName;
+                }
+                if (ResumeFile != null)
+                {
+                    userDetail.ResumeFileName= FileUpload.UploadPDFFile(ResumeFile, Server, "/Content/Uploaded/resume/");
+                }
+                else
+                {
+                    string oldFileName = (from x in db.UserDetails
+                                          where x.UserID == userDetail.UserID
+                                          select x.ResumeFileName).Single();
+                    userDetail.ResumeFileName = oldFileName;
                 }
 
                 db.Entry(userDetail).State = EntityState.Modified;
