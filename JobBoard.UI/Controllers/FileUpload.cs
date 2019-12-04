@@ -25,9 +25,24 @@ namespace JobBoard.UI
                     return "default.jpg";
                 }
 
-                
-            
-            
+        }
+
+        internal static string UploadPDFFile(HttpPostedFileBase theFile, HttpServerUtilityBase Server, string folderPath)
+        {
+            string fileName = theFile.FileName;
+            string ext = fileName.Substring(fileName.LastIndexOf("."));
+            string[] goodExts = new string[] { ".pdf" };
+
+            if (goodExts.Contains(ext.ToLower()))
+            {
+                fileName = Guid.NewGuid() + ext;
+                theFile.SaveAs(Server.MapPath(folderPath + fileName));
+                return folderPath + fileName;
+            }
+            else
+            {
+                return "";
+            }
         }
     }
 }
