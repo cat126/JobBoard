@@ -1,4 +1,5 @@
 ﻿using IdentitySample.Models;
+using JobBoard.DataLayer;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -74,6 +75,19 @@ namespace JobBoard.UI.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    using (JobBoardEntities db = new JobBoardEntities())
+                    {
+                        string userID = (from x in db.AspNetUsers
+                                        where x.Email == model.Email
+                                        select x.Id).Single();
+                        var userDetailCheck = from x in db.UserDetails
+                                              where x.UserID == userID
+                                              select x;
+                        if (userDetailCheck.Count()==0)
+                        {
+                            return Redirect("/UserDetails/Create");
+                        }
+                    }
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -153,11 +167,12 @@ namespace JobBoard.UI.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
-                    ViewBag.Link = callbackUrl;
-                    return View("DisplayEmail");
+                    //var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
+                    //ViewBag.Link = callbackUrl;
+                    //return View("DisplayEmail");
+                    return Redirect("/UserDetails/Create");
                 }
                 AddErrors(result);
             }
