@@ -12,7 +12,7 @@
           <Property Name="ApplicationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="OpenPositionID" Type="int" Nullable="false" />
           <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="ApplicationDate" Type="date" Nullable="false" />
+          <Property Name="ApplicationDate" Type="datetime" Nullable="false" />
           <Property Name="ManagerNotes" Type="varchar" MaxLength="2000" />
           <Property Name="ApplicationStatusID" Type="int" Nullable="false" />
           <Property Name="ResumeFileName" Type="varchar" MaxLength="75" />
@@ -293,7 +293,7 @@
           <Property Name="ApplicationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="OpenPositionID" Type="Int32" Nullable="false" />
           <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ApplicationDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ApplicationDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ManagerNotes" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
           <Property Name="ApplicationStatusID" Type="Int32" Nullable="false" />
           <Property Name="ResumeFileName" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
