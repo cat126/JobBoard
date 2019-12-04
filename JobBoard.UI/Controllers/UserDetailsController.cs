@@ -7,9 +7,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using JobBoard.DataLayer;
+using Microsoft.AspNet.Identity;
 
 namespace JobBoard.UI.Controllers
 {
+    [Authorize]
     public class UserDetailsController : Controller
     {
         private JobBoardEntities db = new JobBoardEntities();
@@ -17,8 +19,7 @@ namespace JobBoard.UI.Controllers
         // GET: UserDetails
         public ActionResult Index()
         {
-            var userDetails = db.UserDetails.Include(u => u.AspNetUser);
-            return View(userDetails.ToList());
+            return Redirect("/UserDetails/Create");
         }
 
         // GET: UserDetails/Details/5
@@ -39,7 +40,20 @@ namespace JobBoard.UI.Controllers
         // GET: UserDetails/Create
         public ActionResult Create()
         {
-            ViewBag.UserID = new SelectList(db.AspNetUsers, "Id", "Email");
+            string userID= User.Identity.GetUserId();
+            //AspNetUser theUser= (from x in db.AspNetUsers
+            //                    where x.Id.Equals(userID)
+            //                    select x).Single();
+            
+            var userDetailCheck = from x in db.UserDetails
+                                  where x.UserID == userID
+                                  select x;
+            if (userDetailCheck.Count() !=0)
+            {
+                return Redirect("/UserDetails/Edit");
+            }
+
+            ViewBag.userID = userID;
             return View();
         }
 
@@ -52,28 +66,26 @@ namespace JobBoard.UI.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (!userDetail.UserID.Equals(User.Identity.GetUserId()))
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+                }
                 db.UserDetails.Add(userDetail);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Redirect("/");
             }
 
-            ViewBag.UserID = new SelectList(db.AspNetUsers, "Id", "Email", userDetail.UserID);
+            ViewBag.userID = userDetail.UserID;
             return View(userDetail);
         }
 
         // GET: UserDetails/Edit/5
-        public ActionResult Edit(string id)
+        public ActionResult Edit()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            UserDetail userDetail = db.UserDetails.Find(id);
-            if (userDetail == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.UserID = new SelectList(db.AspNetUsers, "Id", "Email", userDetail.UserID);
+            string userID = User.Identity.GetUserId();
+            UserDetail userDetail = db.UserDetails.Find(userID);
+
+
             return View(userDetail);
         }
 
@@ -86,39 +98,19 @@ namespace JobBoard.UI.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (!userDetail.UserID.Equals(User.Identity.GetUserId()))
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+                }
+
                 db.Entry(userDetail).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Redirect("/");
             }
-            ViewBag.UserID = new SelectList(db.AspNetUsers, "Id", "Email", userDetail.UserID);
+            //ViewBag.UserID = new SelectList(db.AspNetUsers, "Id", "Email", userDetail.UserID);
             return View(userDetail);
         }
 
-        // GET: UserDetails/Delete/5
-        public ActionResult Delete(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            UserDetail userDetail = db.UserDetails.Find(id);
-            if (userDetail == null)
-            {
-                return HttpNotFound();
-            }
-            return View(userDetail);
-        }
-
-        // POST: UserDetails/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
-        {
-            UserDetail userDetail = db.UserDetails.Find(id);
-            db.UserDetails.Remove(userDetail);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
 
         protected override void Dispose(bool disposing)
         {

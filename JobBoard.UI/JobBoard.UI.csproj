@@ -820,10 +820,8 @@
     <Content Include="Views\ApplicationStatus\Edit.cshtml" />
     <Content Include="Views\ApplicationStatus\Index.cshtml" />
     <Content Include="Views\UserDetails\Create.cshtml" />
-    <Content Include="Views\UserDetails\Delete.cshtml" />
     <Content Include="Views\UserDetails\Details.cshtml" />
     <Content Include="Views\UserDetails\Edit.cshtml" />
-    <Content Include="Views\UserDetails\Index.cshtml" />
     <Content Include="Views\UserDetailsAdmin\Create.cshtml" />
     <Content Include="Views\UserDetailsAdmin\Delete.cshtml" />
     <Content Include="Views\UserDetailsAdmin\Details.cshtml" />
