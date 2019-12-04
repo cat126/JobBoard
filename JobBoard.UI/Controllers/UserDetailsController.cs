@@ -22,28 +22,12 @@ namespace JobBoard.UI.Controllers
             return Redirect("/UserDetails/Create");
         }
 
-        // GET: UserDetails/Details/5
-        public ActionResult Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            UserDetail userDetail = db.UserDetails.Find(id);
-            if (userDetail == null)
-            {
-                return HttpNotFound();
-            }
-            return View(userDetail);
-        }
+
 
         // GET: UserDetails/Create
         public ActionResult Create()
         {
             string userID= User.Identity.GetUserId();
-            //AspNetUser theUser= (from x in db.AspNetUsers
-            //                    where x.Id.Equals(userID)
-            //                    select x).Single();
             
             var userDetailCheck = from x in db.UserDetails
                                   where x.UserID == userID
@@ -107,7 +91,6 @@ namespace JobBoard.UI.Controllers
                 db.SaveChanges();
                 return Redirect("/");
             }
-            //ViewBag.UserID = new SelectList(db.AspNetUsers, "Id", "Email", userDetail.UserID);
             return View(userDetail);
         }
 
