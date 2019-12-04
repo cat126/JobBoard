@@ -12,6 +12,9 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.PhotoFileName)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.LocationName)
         </th>
         <th>
@@ -31,6 +34,12 @@
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            <a href="@Url.Action("Details", "Locations")/@item.LocationID">
+                <img src="@Html.DisplayFor(modelItem => item.PhotoFileName)" alt="@Html.DisplayFor(modelItem => item.LocationName)" />
+            </a>
+            
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.LocationName)
         </td>

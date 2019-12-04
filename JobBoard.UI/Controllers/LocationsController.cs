@@ -52,10 +52,14 @@ namespace JobBoard.UI.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ManagerID,Latitude,Longitude,Address")] Location location)
+        public ActionResult Create([Bind(Include = "LocationName,ManagerID,Latitude,Longitude,Address")] Location location, HttpPostedFileBase PhotoFile)
         {
             if (ModelState.IsValid)
             {
+                if (PhotoFile != null)
+                {
+                    location.PhotoFileName = FileUpload.UploadImageFile(PhotoFile, Server, "/Content/Uploaded/img/");
+                }
                 db.Locations.Add(location);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -94,10 +98,21 @@ namespace JobBoard.UI.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "LocationName,LocationID,ManagerID,Latitude,Longitude,Address")] Location location)
+        public ActionResult Edit([Bind(Include = "LocationName,LocationID,ManagerID,Latitude,Longitude,Address")] Location location, HttpPostedFileBase PhotoFile)
         {
             if (ModelState.IsValid)
             {
+                if (PhotoFile != null)
+                {
+                    location.PhotoFileName = FileUpload.UploadImageFile(PhotoFile, Server, "/Content/Uploaded/img/");
+                }
+                else
+                {
+                    string oldFileName = (from x in db.Locations
+                                          where x.LocationID == location.LocationID
+                                          select x.PhotoFileName).Single();
+                    location.PhotoFileName = oldFileName;
+                }
                 db.Entry(location).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

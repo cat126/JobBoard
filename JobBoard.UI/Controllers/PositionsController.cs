@@ -94,6 +94,13 @@ namespace JobBoard.UI.Controllers
                 {
                     position.PhotoFileName = FileUpload.UploadImageFile(PhotoFile, Server, "/Content/Uploaded/img/");
                 }
+                else
+                {
+                    string oldFileName = (from x in db.Positions
+                                          where x.PositionID == position.PositionID
+                                          select x.PhotoFileName).Single();
+                    position.PhotoFileName = oldFileName;
+                }
                 db.Entry(position).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
