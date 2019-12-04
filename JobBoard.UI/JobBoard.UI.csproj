@@ -826,6 +826,7 @@
     <Content Include="Views\UserDetailsAdmin\Details.cshtml" />
     <Content Include="Views\UserDetailsAdmin\Edit.cshtml" />
     <Content Include="Views\UserDetailsAdmin\Index.cshtml" />
+    <Content Include="Views\OpenPositions\Apply.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

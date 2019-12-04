@@ -35,6 +35,7 @@
             @Html.DisplayFor(modelItem => item.Location.UserDetail.FirstName) @Html.DisplayFor(modelItem => item.Location.UserDetail.LastName)
         </td>
         <td>
+            @Html.ActionLink("Apply", "Apply", new { id = item.OpenPositionID }) |
             @Html.ActionLink("Edit", "Edit", new { id = item.OpenPositionID }) |
             @Html.ActionLink("Details", "Details", new { id = item.OpenPositionID }) |
             @Html.ActionLink("Delete", "Delete", new { id = item.OpenPositionID })

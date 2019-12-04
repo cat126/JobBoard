@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using JobBoard.DataLayer;
+using Microsoft.AspNet.Identity;
 
 namespace JobBoard.UI.Controllers
 {
@@ -122,6 +123,43 @@ namespace JobBoard.UI.Controllers
             db.OpenPositions.Remove(openPosition);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Apply(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            OpenPosition openPosition = db.OpenPositions.Find(id);
+            if (openPosition == null)
+            {
+                return HttpNotFound();
+            }
+            string userID = User.Identity.GetUserId();
+            var applicationCheck = from x in db.Applications
+                                   where x.UserID == userID && x.OpenPositionID == openPosition.OpenPositionID
+                                   select x;
+            if (applicationCheck.Count()==0)
+            {
+                Application application = new Application();
+                application.ApplicationDate = DateTime.Now;
+                application.ApplicationStatusID = 1;
+                application.ResumeFileName = (from x in db.UserDetails
+                                              where x.UserID == userID
+                                              select x.ResumeFileName).Single();
+                application.UserID = userID;
+                application.OpenPositionID = openPosition.OpenPositionID;
+                db.Applications.Add(application);
+                db.SaveChanges();
+                ViewBag.Message = "You have successfully applied";
+            }
+            else
+            {
+                ViewBag.Message = "You have already applied";
+            }
+            
+            return View();
         }
 
         protected override void Dispose(bool disposing)
