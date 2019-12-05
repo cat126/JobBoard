@@ -46,10 +46,14 @@ namespace JobBoard.UI.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CategoryID,CategoryDescription,CategoryName")] Category category)
+        public ActionResult Create([Bind(Include = "CategoryID,CategoryDescription,CategoryName")] Category category, HttpPostedFileBase IconFile)
         {
             if (ModelState.IsValid)
             {
+                if (IconFile != null)
+                {
+                    category.IconFileName = FileUpload.UploadImageFile(IconFile, Server, "/Content/Uploaded/img/");
+                }
                 db.Categories.Add(category);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -78,10 +82,21 @@ namespace JobBoard.UI.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CategoryID,CategoryDescription,CategoryName")] Category category)
+        public ActionResult Edit([Bind(Include = "CategoryID,CategoryDescription,CategoryName")] Category category, HttpPostedFileBase IconFile)
         {
             if (ModelState.IsValid)
             {
+                if (IconFile != null)
+                {
+                    category.IconFileName = FileUpload.UploadImageFile(IconFile, Server, "/Content/Uploaded/img/");
+                }
+                else
+                {
+                    string oldFileName = (from x in db.Categories
+                                          where x.CategoryID == category.CategoryID
+                                          select x.IconFileName).Single();
+                    category.IconFileName = oldFileName;
+                }
                 db.Entry(category).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
