@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="/Content/css/flaticon.css">
     <link rel="stylesheet" href="/Content/css/icomoon.css">
     <link rel="stylesheet" href="/Content/css/style.css">
+
+    <link rel="stylesheet" href="/Content/css/superfish.css">
 </head>
 <body>
 
@@ -30,12 +32,10 @@
                 <span class="oi oi-menu"></span> Menu
             </button>
             <div class="collapse navbar-collapse" id="ftco-nav">
-                <ul class="navbar-nav ml-auto">
+                <ul class="navbar-nav ml-auto sf-menu">
                     <li class="nav-item active"><a href="@Url.Action("Index","Home")" class="nav-link">Home</a></li>
                     <li class="nav-item"><a href="@Url.Action("Index","OpenPositions")" class="nav-link">Browse Jobs</a></li>
                     <li class="nav-item"><a href="@Url.Action("Contact","Home")" class="nav-link">Contact</a></li>
-                    <li class="nav-item cta mr-md-1"><a href="/Content/new-post.html" class="nav-link">Post a Job</a></li>
-                    <li class="nav-item cta cta-colored"><a href="/Content/job-post.html" class="nav-link">Want a Job</a></li>
                     <li class="menu-has-children">
                         <a class="nav-link" href="">Manager</a>
                         <ul>
@@ -173,7 +173,14 @@
     <script src="/Content/js/scrollax.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
     <script src="/Content/js/google-map.js"></script>
+    <script src="~/Content/js/hoverIntent.js"></script>
+    <script src="/Content/js/superfish.js"></script>
     <script src="/Content/js/main.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+            jQuery('ul.sf-menu').superfish();
+        });
+    </script>
     @RenderSection("Scripts", false)
 </body>
 </html>
