@@ -646,6 +646,7 @@
     <Content Include="_archive\scss\bootstrap\_utilities.scss" />
     <Content Include="_archive\scss\bootstrap\_variables.scss" />
     <Content Include="_archive\scss\style.scss" />
+    <Content Include="Views\OpenPositions\ErrorNotAManager.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

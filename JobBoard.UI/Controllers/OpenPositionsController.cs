@@ -51,9 +51,27 @@ namespace JobBoard.UI.Controllers
         }
 
         // GET: OpenPositions/Create
+        [Authorize]
         public ActionResult Create()
         {
-            ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "LocationName");
+            string userID = User.Identity.GetUserId();
+            AspNetUser theUser = (from x in db.AspNetUsers
+                                 where x.Id == userID
+                                 select x).Single();
+            var rollCheck = theUser.AspNetRoles.Where(x => x.Name == "Admin");
+            var locations = db.Locations.Where(x=>true);
+
+            if (rollCheck.Count()==0)
+            {
+                // the user is not an admin
+                locations = locations.Where(x=>x.ManagerID==userID);
+
+            }
+            if (locations.Count()==0)
+            {
+                return RedirectToAction("ErrorNotAManager");
+            }
+            ViewBag.LocationID = new SelectList(locations, "LocationID", "LocationName");
             ViewBag.PositionID = new SelectList(db.Positions, "PositionID", "Title");
             return View();
         }
@@ -65,6 +83,30 @@ namespace JobBoard.UI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "OpenPositionID,PositionID,LocationID")] OpenPosition openPosition)
         {
+            string userID = User.Identity.GetUserId();
+            AspNetUser theUser = (from x in db.AspNetUsers
+                                  where x.Id == userID
+                                  select x).Single();
+            var rollCheck = theUser.AspNetRoles.Where(x => x.Name == "Admin");
+            var locations = db.Locations.Where(x => true);
+
+            if (rollCheck.Count() == 0)
+            {
+                // the user is not an admin
+                locations = locations.Where(x => x.ManagerID == userID);
+
+            }
+            if (locations.Count() == 0)
+            {
+                return RedirectToAction("ErrorNotAManager");
+            }
+            var locationCheck = from x in locations
+                                where x.LocationID == openPosition.LocationID
+                                select x;
+            if (locationCheck.Count()==0)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
             if (ModelState.IsValid)
             {
                 db.OpenPositions.Add(openPosition);
@@ -72,7 +114,7 @@ namespace JobBoard.UI.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "LocationName", openPosition.LocationID);
+            ViewBag.LocationID = new SelectList(locations, "LocationID", "LocationName", openPosition.LocationID);
             ViewBag.PositionID = new SelectList(db.Positions, "PositionID", "Title", openPosition.PositionID);
             return View(openPosition);
         }
@@ -174,7 +216,10 @@ namespace JobBoard.UI.Controllers
             
             return View();
         }
-
+        public ActionResult ErrorNotAManager()
+        {
+            return View();
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
