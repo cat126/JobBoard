@@ -31,20 +31,52 @@
             </button>
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active"><a href="/Content/index.html" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="/Content/browsejobs.html" class="nav-link">Browse Jobs</a></li>
-                    <li class="nav-item"><a href="/Content/candidates.html" class="nav-link">Canditates</a></li>
-                    <li class="nav-item"><a href="/Content/blog.html" class="nav-link">Blog</a></li>
-                    <li class="nav-item"><a href="/Content/contact.html" class="nav-link">Contact</a></li>
+                    <li class="nav-item active"><a href="@Url.Action("Index","Home")" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="@Url.Action("Index","OpenPositions")" class="nav-link">Browse Jobs</a></li>
+                    <li class="nav-item"><a href="@Url.Action("Contact","Home")" class="nav-link">Contact</a></li>
                     <li class="nav-item cta mr-md-1"><a href="/Content/new-post.html" class="nav-link">Post a Job</a></li>
                     <li class="nav-item cta cta-colored"><a href="/Content/job-post.html" class="nav-link">Want a Job</a></li>
+                    <li class="menu-has-children">
+                        <a class="nav-link" href="">Manager</a>
+                        <ul>
+                            <li class="nav-item"><a href="@Url.Action("Index","Positions")" class="nav-link">Manage  Positions </a></li>
+                            <li class="nav-item"><a href="@Url.Action("Index","Applications")" class="nav-link">Manage Applications</a></li>
+                            <li class="nav-item"><a href="@Url.Action("Create","OpenPositions")" class="nav-link">List New Job </a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-has-children">
+                        <a class="nav-link" href="">Admin</a>
+                        <ul>
+                            <li class="nav-item"><a href="@Url.Action("Index","UsersAdmin")" class="nav-link">Manage Users</a></li>
+                            <li class="nav-item"><a href="@Url.Action("Index","RolesAdmin")" class="nav-link">Manage Roles</a></li>
+                            <li class="nav-item"><a href="@Url.Action("Index","Locations")" class="nav-link">Manage Locations</a></li>
+                            <li class="nav-item"><a href="@Url.Action("Index","UserDetailsAdmin")" class="nav-link">Manage User Information</a></li>
+                        </ul>
+                    </li>
+                    @Html.Partial("_LoginPartial")
                 </ul>
             </div>
         </div>
     </nav>
     <!-- END nav -->
+    @if (ViewBag.displayHeader == null)
+    {
+        <div class="hero-wrap hero-wrap-2" style="background-image: url(&quot;Content/images/bg_1.jpg&quot;); background-position: 50% 0px;" data-stellar-background-ratio="0.5">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row no-gutters slider-text align-items-end justify-content-start">
+                    <div class="col-md-12 ftco-animate text-center mb-5 fadeInUp ftco-animated">
+                        <p class="breadcrumbs mb-0"><span class="mr-3"><a href="index.html">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Canditates</span></p>
+                        <h1 class="mb-3 bread">Hire Your Best Candidates</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
     <!--Content-->
-    @RenderBody()
+    <div id="Content">
+        @RenderBody()
+    </div>
     <!--End Content-->
     <footer class="ftco-footer ftco-bg-dark ftco-section">
         <div class="container">
@@ -142,6 +174,6 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
     <script src="/Content/js/google-map.js"></script>
     <script src="/Content/js/main.js"></script>
-    @RenderSection("Scripts",false)
+    @RenderSection("Scripts", false)
 </body>
 </html>

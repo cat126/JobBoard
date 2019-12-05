@@ -7,6 +7,7 @@ namespace JobBoard.UI.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            ViewBag.displayHeader = false;
             return View();
         }
 

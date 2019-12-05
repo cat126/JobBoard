@@ -5,16 +5,16 @@
         @Html.AntiForgeryToken()
     }
     </li>
-            <li>
+            <li class="nav-item">
                 @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
             </li>
-            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+            <li class="nav-item"><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
         
     
 }
 else {
  
-        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class= "ticker-btn" })</li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "ticker-btn" })</li>
+        <li class="nav-item cta mr-md-1">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li class="nav-item cta cta-colored">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
 
 }
