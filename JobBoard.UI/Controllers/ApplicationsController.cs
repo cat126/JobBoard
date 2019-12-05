@@ -78,7 +78,6 @@ namespace JobBoard.UI.Controllers
                 return HttpNotFound();
             }
             ViewBag.ApplicationStatusID = new SelectList(db.ApplicationStatus1, "ApplicationStatusID", "StatusName", application.ApplicationStatusID);
-            ViewBag.OpenPositionID = new SelectList(db.OpenPositions, "OpenPositionID", "OpenPositionID", application.OpenPositionID);
             ViewBag.UserID = new SelectList(db.UserDetails, "UserID", "FirstName", application.UserID);
             return View(application);
         }
@@ -97,7 +96,6 @@ namespace JobBoard.UI.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.ApplicationStatusID = new SelectList(db.ApplicationStatus1, "ApplicationStatusID", "StatusName", application.ApplicationStatusID);
-            ViewBag.OpenPositionID = new SelectList(db.OpenPositions, "OpenPositionID", "OpenPositionID", application.OpenPositionID);
             ViewBag.UserID = new SelectList(db.UserDetails, "UserID", "FirstName", application.UserID);
             return View(application);
         }
