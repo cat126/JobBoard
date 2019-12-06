@@ -51,7 +51,7 @@ namespace JobBoard.UI.Controllers
         }
 
         // GET: OpenPositions/Create
-        [Authorize]
+        [Authorize(Roles = "Admin, Managers")]
         public ActionResult Create()
         {
             string userID = User.Identity.GetUserId();
@@ -81,6 +81,7 @@ namespace JobBoard.UI.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Managers")]
         public ActionResult Create([Bind(Include = "OpenPositionID,PositionID,LocationID")] OpenPosition openPosition)
         {
             string userID = User.Identity.GetUserId();
@@ -121,6 +122,7 @@ namespace JobBoard.UI.Controllers
 
 
         // GET: OpenPositions/Delete/5
+        [Authorize(Roles = "Admin, Managers")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -138,6 +140,7 @@ namespace JobBoard.UI.Controllers
         // POST: OpenPositions/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Managers")]
         public ActionResult DeleteConfirmed(int id)
         {
             OpenPosition openPosition = db.OpenPositions.Find(id);
@@ -146,6 +149,7 @@ namespace JobBoard.UI.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize]
         public ActionResult Apply(int? id)
         {
             if (id == null)

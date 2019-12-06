@@ -10,6 +10,7 @@ using JobBoard.DataLayer;
 
 namespace JobBoard.UI.Controllers
 {
+    [Authorize(Roles = "Admin, Managers")]
     public class PositionsController : Controller
     {
         private JobBoardEntities db = new JobBoardEntities();

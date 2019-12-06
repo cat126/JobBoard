@@ -36,6 +36,7 @@ namespace JobBoard.UI.Controllers
         }
 
         // GET: Categories/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -46,6 +47,7 @@ namespace JobBoard.UI.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Create([Bind(Include = "CategoryID,CategoryDescription,CategoryName")] Category category, HttpPostedFileBase IconFile)
         {
             if (ModelState.IsValid)
@@ -63,6 +65,7 @@ namespace JobBoard.UI.Controllers
         }
 
         // GET: Categories/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -82,6 +85,7 @@ namespace JobBoard.UI.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit([Bind(Include = "CategoryID,CategoryDescription,CategoryName")] Category category, HttpPostedFileBase IconFile)
         {
             if (ModelState.IsValid)
@@ -105,6 +109,7 @@ namespace JobBoard.UI.Controllers
         }
 
         // GET: Categories/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -122,6 +127,7 @@ namespace JobBoard.UI.Controllers
         // POST: Categories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteConfirmed(int id)
         {
             Category category = db.Categories.Find(id);
