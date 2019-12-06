@@ -40,30 +40,30 @@
                     {
                         if (User.IsInRole("Managers") || User.IsInRole("Admin"))
                         {
-                        <li class="menu-has-children nav-item">
-                            <a class="nav-link" href="">Manager</a>
-                            <ul class="submenu">
-                                <li class="nav-item"><a href="@Url.Action("Index", "Positions")" class="nav-link">Manage  Positions </a></li>
-                                <li class="nav-item"><a href="@Url.Action("Index", "Applications")" class="nav-link">Manage Applications</a></li>
-                                <li class="nav-item"><a href="@Url.Action("Create", "OpenPositions")" class="nav-link">List New Job </a></li>
-                            </ul>
-                        </li>
+                            <li class="menu-has-children nav-item">
+                                <a class="nav-link" href="">Manager</a>
+                                <ul class="submenu">
+                                    <li class="nav-item"><a href="@Url.Action("Index", "Positions")" class="nav-link">Manage  Positions </a></li>
+                                    <li class="nav-item"><a href="@Url.Action("Index", "Applications")" class="nav-link">Manage Applications</a></li>
+                                    <li class="nav-item"><a href="@Url.Action("Create", "OpenPositions")" class="nav-link">List New Job </a></li>
+                                </ul>
+                            </li>
                         }
                         if (User.IsInRole("Admin"))
                         {
-                        <li class="menu-has-children nav-item">
-                            <a class="nav-link" href="">Admin</a>
-                            <ul class="submenu">
-                                <li class="nav-item"><a href="@Url.Action("Index", "UsersAdmin")" class="nav-link">Manage Users</a></li>
-                                <li class="nav-item"><a href="@Url.Action("Index", "RolesAdmin")" class="nav-link">Manage Roles</a></li>
-                                <li class="nav-item"><a href="@Url.Action("Index", "Locations")" class="nav-link">Manage Locations</a></li>
-                                <li class="nav-item"><a href="@Url.Action("Index", "UserDetailsAdmin")" class="nav-link">Manage User Information</a></li>
-                            </ul>
-                        </li>
-                            }
+                            <li class="menu-has-children nav-item">
+                                <a class="nav-link" href="">Admin</a>
+                                <ul class="submenu">
+                                    <li class="nav-item"><a href="@Url.Action("Index", "UsersAdmin")" class="nav-link">Manage Users</a></li>
+                                    <li class="nav-item"><a href="@Url.Action("Index", "RolesAdmin")" class="nav-link">Manage Roles</a></li>
+                                    <li class="nav-item"><a href="@Url.Action("Index", "Locations")" class="nav-link">Manage Locations</a></li>
+                                    <li class="nav-item"><a href="@Url.Action("Index", "UserDetailsAdmin")" class="nav-link">Manage User Information</a></li>
+                                </ul>
+                            </li>
                         }
-                        @Html.Partial("_LoginPartial")
-                    </ul>
+                    }
+                    @Html.Partial("_LoginPartial")
+                </ul>
             </div>
         </div>
     </nav>
@@ -190,6 +190,19 @@
             jQuery('ul.sf-menu').superfish();
         });
     </script>
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        (function () {
+            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/5dea9071d96992700fcb205a/default';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
     @RenderSection("Scripts", false)
 </body>
 </html>
