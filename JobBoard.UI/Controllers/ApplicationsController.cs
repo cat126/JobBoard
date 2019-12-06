@@ -93,11 +93,13 @@ namespace JobBoard.UI.Controllers
         {
             if (ModelState.IsValid)
             {
+                // we don't want the users to be able to edit all of the fields so we have to got back and get those read only fields
+                // geting two instances of the same object from the same instnce of JobBoardEntities cause errors so we create a  secound JobBoardEntities
                 using (JobBoardEntities db2 = new JobBoardEntities())
                 {
 
 
-                    // we don't want the users to be able to edit all of the fields so we have to got back and get those read only fields
+
                     Application oldApplication = (from x in db2.Applications
                                                   where x.ApplicationID == application.ApplicationID
                                                   select x).Single();
