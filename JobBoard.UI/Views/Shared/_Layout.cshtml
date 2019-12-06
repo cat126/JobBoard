@@ -36,25 +36,34 @@
                     <li class="nav-item active"><a href="@Url.Action("Index","Home")" class="nav-link">Home</a></li>
                     <li class="nav-item"><a href="@Url.Action("Index","OpenPositions")" class="nav-link">Browse Jobs</a></li>
                     <li class="nav-item"><a href="@Url.Action("Contact","Home")" class="nav-link">Contact</a></li>
-                    <li class="menu-has-children nav-item">
-                        <a class="nav-link" href="">Manager</a>
-                        <ul class="submenu">
-                            <li class="nav-item"><a href="@Url.Action("Index","Positions")" class="nav-link">Manage  Positions </a></li>
-                            <li class="nav-item"><a href="@Url.Action("Index","Applications")" class="nav-link">Manage Applications</a></li>
-                            <li class="nav-item"><a href="@Url.Action("Create","OpenPositions")" class="nav-link">List New Job </a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-has-children nav-item">
-                        <a class="nav-link" href="">Admin</a>
-                        <ul class="submenu">
-                            <li class="nav-item"><a href="@Url.Action("Index","UsersAdmin")" class="nav-link">Manage Users</a></li>
-                            <li class="nav-item"><a href="@Url.Action("Index","RolesAdmin")" class="nav-link">Manage Roles</a></li>
-                            <li class="nav-item"><a href="@Url.Action("Index","Locations")" class="nav-link">Manage Locations</a></li>
-                            <li class="nav-item"><a href="@Url.Action("Index","UserDetailsAdmin")" class="nav-link">Manage User Information</a></li>
-                        </ul>
-                    </li>
-                    @Html.Partial("_LoginPartial")
-                </ul>
+                    @if (Request.IsAuthenticated)
+                    {
+                        if (User.IsInRole("Managers") || User.IsInRole("Admin"))
+                        {
+                        <li class="menu-has-children nav-item">
+                            <a class="nav-link" href="">Manager</a>
+                            <ul class="submenu">
+                                <li class="nav-item"><a href="@Url.Action("Index", "Positions")" class="nav-link">Manage  Positions </a></li>
+                                <li class="nav-item"><a href="@Url.Action("Index", "Applications")" class="nav-link">Manage Applications</a></li>
+                                <li class="nav-item"><a href="@Url.Action("Create", "OpenPositions")" class="nav-link">List New Job </a></li>
+                            </ul>
+                        </li>
+                        }
+                        if (User.IsInRole("Admin"))
+                        {
+                        <li class="menu-has-children nav-item">
+                            <a class="nav-link" href="">Admin</a>
+                            <ul class="submenu">
+                                <li class="nav-item"><a href="@Url.Action("Index", "UsersAdmin")" class="nav-link">Manage Users</a></li>
+                                <li class="nav-item"><a href="@Url.Action("Index", "RolesAdmin")" class="nav-link">Manage Roles</a></li>
+                                <li class="nav-item"><a href="@Url.Action("Index", "Locations")" class="nav-link">Manage Locations</a></li>
+                                <li class="nav-item"><a href="@Url.Action("Index", "UserDetailsAdmin")" class="nav-link">Manage User Information</a></li>
+                            </ul>
+                        </li>
+                            }
+                        }
+                        @Html.Partial("_LoginPartial")
+                    </ul>
             </div>
         </div>
     </nav>
