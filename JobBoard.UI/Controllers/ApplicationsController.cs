@@ -36,34 +36,6 @@ namespace JobBoard.UI.Controllers
             return View(application);
         }
 
-        // GET: Applications/Create
-        public ActionResult Create()
-        {
-            ViewBag.ApplicationStatusID = new SelectList(db.ApplicationStatus1, "ApplicationStatusID", "StatusName");
-            ViewBag.OpenPositionID = new SelectList(db.OpenPositions, "OpenPositionID", "OpenPositionID");
-            ViewBag.UserID = new SelectList(db.UserDetails, "UserID", "FirstName");
-            return View();
-        }
-
-        // POST: Applications/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ApplicationID,OpenPositionID,UserID,ApplicationDate,ManagerNotes,ApplicationStatusID,ResumeFileName")] Application application)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Applications.Add(application);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.ApplicationStatusID = new SelectList(db.ApplicationStatus1, "ApplicationStatusID", "StatusName", application.ApplicationStatusID);
-            ViewBag.OpenPositionID = new SelectList(db.OpenPositions, "OpenPositionID", "OpenPositionID", application.OpenPositionID);
-            ViewBag.UserID = new SelectList(db.UserDetails, "UserID", "FirstName", application.UserID);
-            return View(application);
-        }
 
         // GET: Applications/Edit/5
         public ActionResult Edit(int? id)
