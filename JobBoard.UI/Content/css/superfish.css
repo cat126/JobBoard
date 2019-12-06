@@ -30,3 +30,18 @@
 	top: 0;
 	left: 100%;
 }
+.submenu {
+    background-color: white;
+    border-color: black;
+    border-width: 0.01em;
+    border-style: solid;
+    box-shadow: 5px 10px 18px #888888;
+}
+.submenu li a {
+    color:black !important;
+
+}
+.submenu li a:hover
+{
+    font-weight: bold;
+}
