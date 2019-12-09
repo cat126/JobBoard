@@ -98,4 +98,9 @@ canvas.particles-js-canvas-el {
     position: absolute;
     top: 0;
     left: 0;
+    z-index: -1;
+    background: linear-gradient(to right, #207dff 0%, #a16ae8 100%);
 }
+/*#particles-js .hero-wrap {
+    z-index:1;
+}*/
