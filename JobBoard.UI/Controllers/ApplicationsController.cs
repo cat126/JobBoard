@@ -21,12 +21,9 @@ namespace JobBoard.UI.Controllers
         {
             var applications = db.Applications.Include(a => a.ApplicationStatu).Include(a => a.OpenPosition).Include(a => a.UserDetail);
             string userID = User.Identity.GetUserId();
-            AspNetUser theUser = (from x in db.AspNetUsers
-                                  where x.Id == userID
-                                  select x).Single();
-            var rollCheck = theUser.AspNetRoles.Where(x => x.Name == "Admin");
 
-            if (rollCheck.Count() == 0)
+
+            if (!User.IsInRole("Admin"))
             {
                 // the user is not an admin
                 applications = from x in applications
@@ -66,11 +63,7 @@ namespace JobBoard.UI.Controllers
                 return HttpNotFound();
             }
             string userID = User.Identity.GetUserId();
-            AspNetUser theUser = (from x in db.AspNetUsers
-                                  where x.Id == userID
-                                  select x).Single();
-            var rollCheck = theUser.AspNetRoles.Where(x => x.Name == "Admin");
-            if (rollCheck.Count() == 0)
+            if (!User.IsInRole("Admin"))
             {
                 // the user is not an admin
                 if (userID!=application.OpenPosition.Location.ManagerID)
@@ -109,11 +102,7 @@ namespace JobBoard.UI.Controllers
                     application.ResumeFileName = oldApplication.ResumeFileName;
 
                     string userID = User.Identity.GetUserId();
-                    AspNetUser theUser = (from x in db.AspNetUsers
-                                          where x.Id == userID
-                                          select x).Single();
-                    var rollCheck = theUser.AspNetRoles.Where(x => x.Name == "Admin");
-                    if (rollCheck.Count() == 0)
+                    if (!User.IsInRole("Admin"))
                     {
                         // the user is not an admin
                         if (userID != oldApplication.OpenPosition.Location.ManagerID)

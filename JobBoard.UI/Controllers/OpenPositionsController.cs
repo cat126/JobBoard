@@ -55,13 +55,9 @@ namespace JobBoard.UI.Controllers
         public ActionResult Create()
         {
             string userID = User.Identity.GetUserId();
-            AspNetUser theUser = (from x in db.AspNetUsers
-                                 where x.Id == userID
-                                 select x).Single();
-            var rollCheck = theUser.AspNetRoles.Where(x => x.Name == "Admin");
             var locations = db.Locations.Where(x=>true);
 
-            if (rollCheck.Count()==0)
+            if (!User.IsInRole("Admin"))
             {
                 // the user is not an admin
                 locations = locations.Where(x=>x.ManagerID==userID);
@@ -85,13 +81,9 @@ namespace JobBoard.UI.Controllers
         public ActionResult Create([Bind(Include = "OpenPositionID,PositionID,LocationID")] OpenPosition openPosition)
         {
             string userID = User.Identity.GetUserId();
-            AspNetUser theUser = (from x in db.AspNetUsers
-                                  where x.Id == userID
-                                  select x).Single();
-            var rollCheck = theUser.AspNetRoles.Where(x => x.Name == "Admin");
             var locations = db.Locations.Where(x => true);
 
-            if (rollCheck.Count() == 0)
+            if (!User.IsInRole("Admin"))
             {
                 // the user is not an admin
                 locations = locations.Where(x => x.ManagerID == userID);
