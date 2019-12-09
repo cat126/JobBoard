@@ -7,6 +7,53 @@
 
 
 <div class="container">
+
+    <div class="col-md-12 tab-wrap">
+
+        <div class="tab-content p-4" id="v-pills-tabContent">
+
+            <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-nextgen-tab">
+                @* job search fourm is here *@
+                <form action="/OpenPositions" class="search-job">
+                    <div class="row no-gutters">
+                        <div class="col-md mr-md-2">
+                            <div class="form-group">
+                                <div class="form-field">
+                                    <div class="icon"><span class="icon-briefcase"></span></div>
+                                    <input name="titleSearch" type="text" class="form-control" placeholder="Job title">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md mr-md-2">
+                            <div class="form-group">
+                                <div class="form-field">
+                                    @*TODO Bruce Smith fix icon *@
+                                    <div class="icon"><i class="fas fa-archive"></i></div>
+                                    <input name="categoriesSearch" type="text" class="form-control" placeholder="Category">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md mr-md-2">
+                            <div class="form-group">
+                                <div class="form-field">
+                                    <div class="icon"><span class="icon-map-marker"></span></div>
+                                    <input name="locationSearch" type="text" class="form-control" placeholder="Location">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md">
+                            <div class="form-group">
+                                <div class="form-field">
+                                    <button type="submit" class="form-control btn btn-primary">Search</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <div class="row">
         @{
 
