@@ -126,6 +126,10 @@ namespace JobBoard.UI.Controllers
             {
                 return HttpNotFound();
             }
+            if (openPosition.Location.ManagerID!= User.Identity.GetUserId()&&!User.IsInRole("Admin"))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
             return View(openPosition);
         }
 
@@ -136,6 +140,10 @@ namespace JobBoard.UI.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             OpenPosition openPosition = db.OpenPositions.Find(id);
+            if (openPosition.Location.ManagerID != User.Identity.GetUserId() && !User.IsInRole("Admin"))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
             db.OpenPositions.Remove(openPosition);
             db.SaveChanges();
             return RedirectToAction("Index");
