@@ -147,6 +147,32 @@ namespace JobBoard.UI.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        //[ValidateAntiForgeryToken]
+        [AllowAnonymous]
+        public JsonResult AjaxEdit(int id, string comment, int statusID)
+        {
+            //db.Entry(publisher).State = EntityState.Modified;
+            //db.SaveChanges();
+            //return Json(publisher);
+            Application application = (from x in db.Applications
+                                       where x.ApplicationID == id
+                                       select x).Single();
+            var statusCheck = from x in db.ApplicationStatus1
+                              where x.ApplicationStatusID == statusID
+                              select x;
+            if (statusCheck.Count() == 1)
+            {
+                application.ApplicationStatusID = statusCheck.Single().ApplicationStatusID;
+            }
+            application.ManagerNotes = comment;
+
+            db.Entry(application).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return Json(true);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
