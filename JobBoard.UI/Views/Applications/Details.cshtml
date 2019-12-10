@@ -4,63 +4,65 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<div class="container">
+    <h2>Details</h2>
 
-<div>
-    <h4>Application</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ApplicationDate)
-        </dt>
+    <div>
+        <h4>Application</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.ApplicationDate)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ApplicationDate)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.ApplicationDate)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ManagerNotes)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.ManagerNotes)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ManagerNotes)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.ManagerNotes)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ResumeFileName)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.ResumeFileName)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ResumeFileName)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.ResumeFileName)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ApplicationStatu.StatusName)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.ApplicationStatu.StatusName)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ApplicationStatu.StatusName)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.ApplicationStatu.StatusName)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.OpenPosition.OpenPositionID)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.OpenPosition.OpenPositionID)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.OpenPosition.OpenPositionID)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.OpenPosition.OpenPositionID)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.UserDetail.FirstName)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.UserDetail.FirstName)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.UserDetail.FirstName)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.UserDetail.FirstName)
+            </dd>
 
-    </dl>
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ApplicationID }, new { @class = "btn btn-primary" }) |
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
+    </p>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ApplicationID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

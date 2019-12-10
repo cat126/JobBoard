@@ -4,69 +4,72 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
+<div class="container">
+    <h2>Delete</h2>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Application</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ApplicationDate)
-        </dt>
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <h4>Application</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.ApplicationDate)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ApplicationDate)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.ApplicationDate)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ManagerNotes)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.ManagerNotes)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ManagerNotes)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.ManagerNotes)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ResumeFileName)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.ResumeFileName)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ResumeFileName)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.ResumeFileName)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ApplicationStatu.StatusName)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.ApplicationStatu.StatusName)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ApplicationStatu.StatusName)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.ApplicationStatu.StatusName)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.OpenPosition.OpenPositionID)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.OpenPosition.OpenPositionID)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.OpenPosition.OpenPositionID)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.OpenPosition.OpenPositionID)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.UserDetail.FirstName)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.UserDetail.FirstName)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.UserDetail.FirstName)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.UserDetail.FirstName)
+            </dd>
 
-    </dl>
+        </dl>
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-primary" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-    }
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-danger" /> |
+                @Html.ActionLink("Cancel", "Index", null , new { @class="btn btn-primary"})
+            </div>
+        }
+    </div>
 </div>
