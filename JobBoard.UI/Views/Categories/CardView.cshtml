@@ -1,0 +1,43 @@
+﻿@model IEnumerable<JobBoard.DataLayer.Category>
+
+@{
+    ViewBag.Title = "CardView";
+}
+
+<h2 class="text-center">Categories</h2>
+
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-3">
+                <div class="top-buffer">
+                    <div class="card">
+                        <div class="my-card-header">@Html.DisplayFor(modelItem => item.CategoryName)</div>
+                        <img class="card-img" src="@Html.DisplayFor(modelItem => item.IconFileName)">
+                        <div class="card-body">@Html.DisplayFor(modelItem => item.CategoryDescription)</div>
+                    </div>
+                </div>
+            </div>
+
+
+        }
+    </div>
+</div>
+
+<style>
+    .top-buffer{
+        padding-top: 5em;
+    }
+    .my-card-header{
+        color:black;
+        text-align:center;
+
+    }
+    .card-body{
+        color:black;
+        font-size:0.8em;
+    }
+</style>
+

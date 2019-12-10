@@ -135,6 +135,10 @@ namespace JobBoard.UI.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        public ActionResult CardView()
+        {
+            return View(db.Categories.ToList());
+        }
 
         protected override void Dispose(bool disposing)
         {
