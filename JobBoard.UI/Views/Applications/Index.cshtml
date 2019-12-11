@@ -33,8 +33,9 @@
         </tr>
 
         @foreach (var item in Model)
-        {
-            <tr>
+        { 
+                string idtext = "TableItem" + @Html.DisplayFor(modelItem => item.ApplicationID);
+            <tr id="@idtext">
                 <td>
                     @Html.DisplayFor(modelItem => item.UserDetail.FirstName) @Html.DisplayFor(modelItem => item.UserDetail.LastName)
                 </td>
@@ -44,10 +45,10 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.ApplicationDate)
                 </td>
-                <td>
+                <td class="ManagerNotes">
                     @Html.DisplayFor(modelItem => item.ManagerNotes)
                 </td>
-                <td>
+                <td class="StatusName">
                     @Html.DisplayFor(modelItem => item.ApplicationStatu.StatusName)
                 </td>
                 <td>
@@ -74,10 +75,12 @@
         
         @using (Html.BeginForm("", "", FormMethod.Post, new { id = "EditFourm" }))
         {
-        @Html.Hidden("id", 1)
-        <input name="comment" type="text">
+        <input id="EditTarget" name="id" type="hidden" value="1" />
+        @*@Html.Hidden("id", 1)*@
+        @Html.AntiForgeryToken()
+        <input id="AjaxEditFourmText" name="comment" type="text">
         <br>
-        <select name="statusId">
+        <select id="StatusNameSelector" name="statusId">
             @using (JobBoardEntities db = new JobBoardEntities())
             {
                 foreach (var item in db.ApplicationStatus1.ToList())
@@ -124,21 +127,37 @@
             function (e) {
                 let itemID = $(this).attr("data-DBID");
                 let editScreen = $("#EditModal");
-                let hiddenIDfield= editScreen.children("#id");
-                hiddenIDfield.attr("value", itemID);
+                //let hiddenIDfield = editScreen.children("#id");
+                //let hiddenIDfield = $("EditTarget");
+                let hiddenIDfield =  document.getElementById("EditTarget");
+                hiddenIDfield.value = itemID;
                 editScreen.show();
             }
         )
         $("#EditFourm").submit(
             function (e) {
                 e.preventDefault();
-                let toSend = $("#AjaxEdit").serializeArray();
-                console.log("hi");
+                let EditFourm = $("#EditFourm");
+                let toSend = EditFourm.serializeArray();
+                console.log(toSend);
                 $.ajax({
                     url: "@Url.Action("AjaxEdit","Applications")",
                     type: "POST",
                     data: toSend
                 });
+                $("#EditModal").hide();
+                //$("#AjaxEditFourmText");
+                let textForTableRowID = "#TableItem" + toSend[0].value;
+                let tableRow = $(textForTableRowID);
+                let managerNotes = tableRow.children(".ManagerNotes")[0];
+                managerNotes.innerText = toSend[2].value;
+                let StatusName = tableRow.children(".StatusName")[0];
+                //let StatusNameSelector = $("#StatusNameSelector");
+                let StatusNameSelector = document.getElementById("StatusNameSelector");
+                //.selectedIndex
+                //.value
+                StatusName.innerText = StatusNameSelector.options[StatusNameSelector.selectedIndex].innerText;
+                
             }
         )
     </script>

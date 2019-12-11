@@ -148,8 +148,7 @@ namespace JobBoard.UI.Controllers
         }
 
         [HttpPost]
-        //[ValidateAntiForgeryToken]
-        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public JsonResult AjaxEdit(int id, string comment, int statusID)
         {
             //db.Entry(publisher).State = EntityState.Modified;
@@ -158,6 +157,16 @@ namespace JobBoard.UI.Controllers
             Application application = (from x in db.Applications
                                        where x.ApplicationID == id
                                        select x).Single();
+            string userID = User.Identity.GetUserId();
+            if (!User.IsInRole("Admin"))
+            {
+                // the user is not an admin
+                if (userID != application.OpenPosition.Location.ManagerID)
+                {
+                    return Json(false);
+                }
+
+            }
             var statusCheck = from x in db.ApplicationStatus1
                               where x.ApplicationStatusID == statusID
                               select x;
