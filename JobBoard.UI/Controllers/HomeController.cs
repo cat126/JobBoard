@@ -20,6 +20,12 @@ namespace JobBoard.UI.Controllers
         public ActionResult Index()
         {
             ViewBag.displayHeader = false;
+            ViewBag.locationCount = (from x in db.Locations
+                                     select x).Count();
+            ViewBag.jobCount = (from x in db.OpenPositions
+                                select x).Count();
+            ViewBag.EmployeesCount = (from x in db.UserDetails
+                                 select x).Count();
             ViewBag.Categories = db.Categories.ToList();
             return View();
         }
