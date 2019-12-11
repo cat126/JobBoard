@@ -133,6 +133,16 @@ namespace JobBoard.UI.Controllers
             {
                 return HttpNotFound();
             }
+            string userID = User.Identity.GetUserId();
+            if (!User.IsInRole("Admin"))
+            {
+                // the user is not an admin
+                if (userID != application.OpenPosition.Location.ManagerID)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+                }
+
+            }
             return View(application);
         }
 
@@ -142,6 +152,16 @@ namespace JobBoard.UI.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Application application = db.Applications.Find(id);
+            string userID = User.Identity.GetUserId();
+            if (!User.IsInRole("Admin"))
+            {
+                // the user is not an admin
+                if (userID != application.OpenPosition.Location.ManagerID)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+                }
+
+            }
             db.Applications.Remove(application);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -179,6 +199,25 @@ namespace JobBoard.UI.Controllers
             db.Entry(application).State = EntityState.Modified;
             db.SaveChanges();
 
+            return Json(true);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult AjaxDelete(int id)
+        {
+            Application application = db.Applications.Find(id);
+            string userID = User.Identity.GetUserId();
+            if (!User.IsInRole("Admin"))
+            {
+                // the user is not an admin
+                if (userID != application.OpenPosition.Location.ManagerID)
+                {
+                    return Json(false);
+                }
+
+            }
+            db.Applications.Remove(application);
+            db.SaveChanges();
             return Json(true);
         }
 
