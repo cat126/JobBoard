@@ -1,0 +1,48 @@
+﻿@model IEnumerable<JobBoard.DataLayer.Application>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container">
+    <h2>Index</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OpenPosition.Position.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OpenPosition.Location.LocationName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ApplicationDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ApplicationStatu.StatusName)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OpenPosition.Position.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OpenPosition.Location.LocationName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ApplicationDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ApplicationStatu.StatusName)
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
