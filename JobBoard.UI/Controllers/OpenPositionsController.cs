@@ -16,7 +16,7 @@ namespace JobBoard.UI.Controllers
         private JobBoardEntities db = new JobBoardEntities();
 
         // GET: OpenPositions
-        public ActionResult Index(string categoriesSearch, string titleSearch, string locationSearch)
+        public ActionResult Index(string categoriesSearch, string titleSearch, string locationSearch, int? categoryID)
         {
             var openPositions = db.OpenPositions.Include(o => o.Location).Include(o => o.Position);
 
@@ -31,6 +31,10 @@ namespace JobBoard.UI.Controllers
             if (!string.IsNullOrEmpty(locationSearch))
             {
                 openPositions = openPositions.Where(x => x.Location.LocationName.Contains(locationSearch));
+            }
+            if (categoryID!=null)
+            {
+                openPositions = openPositions.Where(x=>x.Position.CategoryID== categoryID);
             }
             return View(openPositions.ToList());
         }
