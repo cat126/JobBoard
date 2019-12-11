@@ -164,16 +164,21 @@
             }
         )
         $(".AjaxDelete").click(function (e) {
-            alert("hi");
             let itemID = $(this).attr("data-DBID");
+            let AntiForgeryToken = '@Html.AntiForgeryToken()';
+            let patt = /value="(.+)"/;
+            
+            AntiForgeryToken=AntiForgeryToken.match(patt, AntiForgeryToken)[1];
             $.ajax({
                 url: "@Url.Action("AjaxDelete", "Applications")",
                 type: "POST",
                 data:  [
                     { name: "id", value: itemID },
-                { name: "__RequestVerificationToken", value:'@Html.AntiForgeryToken()'}
+                    { name: "__RequestVerificationToken", value: AntiForgeryToken}
                     ]
             });
+            let textForTableRowID = "#TableItem" + itemID;
+            $(textForTableRowID).remove();
         });
     </script>
 }
