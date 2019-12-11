@@ -14,13 +14,16 @@ namespace JobBoard.DataLayer
         [Required(ErrorMessage = "*")]
         public string UserID { get; set; }
         [Required(ErrorMessage = "*")]
+        [Display(Name = "Applied on")]
         public System.DateTime ApplicationDate { get; set; }
         [UIHint("MultineText")]
         [StringLength(2000, ErrorMessage = "value must be 2000 character or less.")]
+        [Display(Name = "Manager Notes")]
         public string ManagerNotes { get; set; }
         [Required(ErrorMessage = "*")]
         public int ApplicationStatusID { get; set; }
         [DisplayFormat(NullDisplayText = "No File was given")]
+        [Display(Name = "Resume")]
         public string ResumeFileName { get; set; }
     }
     [MetadataType(typeof(ApplicationMetaData))]
@@ -31,6 +34,7 @@ namespace JobBoard.DataLayer
 
         [Required(ErrorMessage = "*")]
         [StringLength(50, ErrorMessage = "value must be 50 character or less.")]
+        [Display(Name = "Status")]
         public string StatusName { get; set; }
         [StringLength(250, ErrorMessage = "value must be 250 character or less.")]
         public string StatusDescription { get; set; }
@@ -42,9 +46,11 @@ namespace JobBoard.DataLayer
     {
         [Required(ErrorMessage = "*")]
         [StringLength(50, ErrorMessage = "value must be 50 character or less.")]
+        [Display(Name = "Category")]
         public string CategoryName { get; set; }
         [StringLength(500, ErrorMessage = "value must be 500 character or less.")] 
         [UIHint("MultineText")]
+        [Display(Name = "Description")]
         public string CategoryDescription { get; set; }
     }
     [MetadataType(typeof(CategoryMetaData))]
@@ -56,6 +62,7 @@ namespace JobBoard.DataLayer
         public string ManagerID { get; set; }
         [Required(ErrorMessage = "*")]
         [StringLength(50, ErrorMessage = "value must be 50 character or less.")]
+        [Display(Name = "Location")]
         public string LocationName { get; set; }
         [Required(ErrorMessage = "*")]
         public decimal Latitude { get; set; }
@@ -84,9 +91,12 @@ namespace JobBoard.DataLayer
         [StringLength(50, ErrorMessage = "value must be 50 character or less.")]
         public string Title { get; set; }
         [Required(ErrorMessage = "*")]
+        [Display(Name = "Job Description")]
         public string JobDescription { get; set; }
         [Required(ErrorMessage = "*")]
         public int CategoryID { get; set; }
+        [Display(Name = "Photo")]
+        public string PhotoFileName { get; set; }
     }
     [MetadataType(typeof(PositionMetaData))]
     public partial class Position { }
@@ -101,7 +111,9 @@ namespace JobBoard.DataLayer
         [Required(ErrorMessage = "*")]
         [StringLength(50, ErrorMessage = "value must be 50 character or less.")]
         public string LastName { get; set; }
+        [Display(Name = "Resume")]
         public string ResumeFileName { get; set; }
+        [Display(Name = "Photo")]
         public string PhotoFileName { get; set; }
     }
     [MetadataType(typeof(UserDetailMetaData))]
