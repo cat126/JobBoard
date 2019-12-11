@@ -263,7 +263,15 @@
                         output += "\n";
                     }
                     var theCategory = categories.ElementAt(i);
-                    output += "<li><a href=\"#\">" + theCategory.CategoryName + "<br><span class=\"number\">354</span> <span>Open position</span><i class=\"ion-ios-arrow-forward\"></i></a></li>";
+                    int jobsInCategory = 0;
+                    using (JobBoardEntities db = new JobBoardEntities())
+                    {
+                         jobsInCategory = (from x in db.OpenPositions
+                                              where x.Position.CategoryID == theCategory.CategoryID
+                                              select x).Count();
+                    }
+
+                    output += "<li><a href=\""+Url.Action("Index", "OpenPositions",new { categoryID=theCategory.CategoryID }) +"\">" + theCategory.CategoryName + "<br><span class=\"number\">"+ jobsInCategory + "</span> <span>Open position</span><i class=\"ion-ios-arrow-forward\"></i></a></li>";
                     output += "\n";
                     if (counter == 4 || i + 1 == categories.Count())
                     {
